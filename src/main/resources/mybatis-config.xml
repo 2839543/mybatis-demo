@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?> <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<typeAliases>
-		<typeAlias alias="Student" type="com.mybatis3.domain.Student" />
-	</typeAliases>
+
+	<properties resource="application.properties">
+		<property name="jdbc.username" value="richie" />
+		<property name="jdbc.password" value="richie" />
+	</properties>
+
+	<typeAliases >
+			<typeAlias type="com.mybatis3.domain.Student" alias="Student"/>
+		</typeAliases>
+
+	<typeHandlers>
+		<typeHandler handler="com.mybatis3.typehandlers.PhoneTypeHandler" />
+	</typeHandlers>
+
+
+
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
-				<property name="driver" value="com.mysql.jdbc.Driver" />
-				<property name="url" value="jdbc:mysql://localhost:3306/test" />
-				<property name="username" value="richie" />
-				<property name="password" value="richie" />
+				 <property name="driver" value="${jdbc.driverClassName}" /> 
+				<!--   <property name="driver" value="com.mysql.jdbc.Driver" /> --> 
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.username}" />
+				<property name="password" value="${jdbc.password}" />
 			</dataSource>
 		</environment>
 	</environments>
